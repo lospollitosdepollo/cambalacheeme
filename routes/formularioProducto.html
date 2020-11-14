@@ -844,13 +844,13 @@ let direccionexacta = document.getElementById('txt_direccion_exacta');
 // Funcion para crear Productos
 
 function createItem() {
-    let error = validar(nombre, descripcion, condicion, precio, categoria, provincia, canton, distrito, direccionexacta);
+    let error = validar();
     
     if(error == false) {
         var params = {
             TableName :"Productos",
             Item:{
-                "idProducto": 2,
+                "idProducto" : idProducto,
                 "nombre": nombre.value,
                 "descripcion": descripcion.value,
                 "condicion": condicion.value,
@@ -874,6 +874,7 @@ function createItem() {
             //    document.getElementById('textarea').innerHTML = "PutItem succeeded: " + "\n" + JSON.stringify(data, undefined, 2);
            alert(JSON.stringify(data, undefined, 2));
             alert("Producto Creado");    
+            limpiarFormulario();
         }
         });
     }
@@ -888,9 +889,13 @@ function createItem() {
 
 }
 
+let getRandomInt = () => {
+  return Math.floor(Math.random() * (1000 - 2)) + 2;
+}
+var idProducto = getRandomInt();
+
 // Función para validar que los campos no estén vacíos
-let validar = (pnombre, pdescripcion, pcondicion, pprecio, pcategoria, pprovincia, pcanton, pdistrito, 
-    pdireccionexacta) => {
+let validar = () => {
 
     let error = false;
 
@@ -902,63 +907,63 @@ let validar = (pnombre, pdescripcion, pcondicion, pprecio, pcategoria, pprovinci
       img_uploader.classList.remove('input_error');
     }
 
-    if (pnombre == '') {
+    if (nombre == '') {
         error = true;
         nombre.classList.add('input_error');
     } else {
         nombre.classList.remove('input_error');
     }
 
-    if (pdescripcion == '') {
+    if (descripcion == '') {
         error = true;
         descripcion.classList.add('input_error');
     } else {
         descripcion.classList.remove('input_error');
     }
 
-    if (pcondicion == '') {
+    if (condicion == '') {
         error = true;
         condicion.classList.add('input_error');
     }  else {
         condicion.classList.remove('input_error');
     }
 
-    if (pprecio == '') {
+    if (precio == '') {
         error = true;
         precio.classList.add('input_error');
     }  else {
         precio.classList.remove('input_error');
     }
 
-    if (pcategoria == '') {
+    if (categoria == '') {
         error = true;
         categoria.classList.add('input_error');
     }  else {
         categoria.classList.remove('input_error');
     }
 
-    if (pprovincia == '') {
+    if (provincia == '') {
         error = true;
         provincia.classList.add('input_error');
     } else {
         provincia.classList.remove('input_error');
     }
 
-    if (pcanton == '') {
+    if (canton == '') {
         error = true;
         canton.classList.add('input_error');
     } else {
         canton.classList.remove('input_error');
     }
 
-    if (pdistrito == '') {
+    if (distrito == '') {
         error = true;
         distrito.classList.add('input_error');
     } else {
         distrito.classList.remove('input_error');
     }
 
-    if (pdireccionexacta == '') {
+    if (direccionexacta == '') {
         error = true;
         direccionexacta.classList.add('input_error');
     } else {
@@ -981,7 +986,6 @@ const limpiarFormulario = () => {
     distrito = '';
     direccionexacta = ''; 
     fotografia = '';
-    img_uploader.src = '../imgs/avatar-placeholder.png';
 };
 
 
