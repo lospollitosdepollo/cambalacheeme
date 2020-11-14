@@ -7,6 +7,10 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname+'/index.html'));
 });
 
+router.get('/', function(req, res, next) {
+  res.sendFile(path.join(__dirname+'/formularioProducto.html'));
+})
+
 module.exports = router;
 
 //   res.sendFile(path.join(__dirname+'/index.html'));
