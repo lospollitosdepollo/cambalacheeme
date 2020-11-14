@@ -15,6 +15,11 @@ router.get('/login', function(req, res, next) {
   res.sendFile(path.join(__dirname+'/iniciarSesion.html'));
 });
 
+router.get('/userprofile', function(req, res, next) {
+  res.sendFile(path.join(__dirname+'/perfil.html'));
+});
+
+
 
 module.exports = router;
 
