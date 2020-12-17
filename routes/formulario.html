@@ -773,7 +773,8 @@
                         </div>
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" id="btnRegistrar" type="button">Registrarse</button>
-
+                            
+                            <button class="btn btn--radius-2 btn--blue"  id="botonPrueba" type="button" >Pruebita</button>
                         </div>
                     </form>
                 </div>
@@ -833,6 +834,7 @@
                         "direccionexacta": direccionexacta.value
                     }
                     
+
                 };
 
                 if(cedula.value){
@@ -1065,6 +1067,31 @@
 
             let btnRegistrar = document.getElementById('btnRegistrar');
             btnRegistrar.addEventListener('click', crearUsuario);
+
+// ------------------------- Prueba ------------------------
+
+            var botonPrueba = document.getElementById("botonPrueba");
+      
+
+// cuando se pulsa en el enlace
+boton.onclick = function(e) {
+    // evitamos la acción por defecto
+    e.preventDefault();
+    // creamos una etiqueta script
+    var s = document.createElement("script");
+    // indicamos en el atributo src el fichero que quieres cargar
+    s.src = "sqs_SendMessage.js";
+    // lo añadimos al documento (y se ejecuta automaticamente)
+    document.querySelector("body").appendChild(s);
+    // borra el script del documento (para evitar basura si se ejecuta multiples veces)
+    s.remove();
+}
+
+
+
+
+
+
 
     </script>
   

@@ -10,23 +10,17 @@ var params = {
    // Remove DelaySeconds parameter and value for FIFO queues
   DelaySeconds: 30,
   MessageAttributes: {
-    "Title": {
-      DataType: "String",
-      StringValue: "The Whistler"
-    },
-    "Author": {
-      DataType: "String",
-      StringValue: "John Grisham"
-    },
-    "WeeksOn": {
+
+    "Se Registro": {
       DataType: "Number",
-      StringValue: "6"
+      StringValue: "1"
     }
   },
-  MessageBody: "Information about current NY Times fiction bestseller for week of 12/11/2016.",
+  MessageBody: "Usuario Registrado Correctamente",
+  
   // MessageDeduplicationId: "TheWhistler",  // Required for FIFO queues
   // MessageGroupId: "Group1",  // Required for FIFO queues
-  QueueUrl: "SQS_COLA_REGISTRO_USUARIO"
+  QueueUrl: "https://sqs.us-east-2.amazonaws.com/374632472070/RegistroMensaje"
 };
 
 sqs.sendMessage(params, function(err, data) {
