@@ -24,6 +24,10 @@ router.get('/formProducto', function(req, res, next) {
   res.sendFile(path.join(__dirname+'/formularioProducto.html'));
 })
 
+router.get('/peticionTrueque', function(req, res, next) {
+  res.sendFile(path.join(__dirname+'/peticionTrueque.html'));
+})
+
 module.exports = router;
 
 //   res.sendFile(path.join(__dirname+'/index.html'));
