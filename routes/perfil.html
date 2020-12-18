@@ -159,8 +159,55 @@
     
        
     <!-- Javascript -->          
+  
 
-	   <script src="js/perfil.js"></script>    
+	   <script>
+	  
+
+	  var usuario =  sessionStorage.getItem("usuarioActivo").getElementById("user");
+	  
+	  listarUsuarios();
+
+	  var idUsuario = infoUsuario(usuario);
+	
+		var nombre = usersList.Items[idUsuario].getElementById("primernombre"); 
+
+	    document.getElementById("p_Usuario").innerHTML = usuario;
+		document.getElementById("p_Nombre").innerHTML = nombre;
+
+		var usersList = [];
+
+
+        function infoUsuario (usuario) {   
+             
+            for (let i = 0; i < usersList.Items.length; i++) {
+              if ( usuario == usersList.Items[i].usuario)
+              id = i;
+            }
+            return id;
+        }
+
+
+		
+		function listarUsuarios() {
+
+			var params = {
+			TableName : "Usuarios",
+			};
+
+			docClient.scan(params, function(err, data) {
+				if (err) {
+					console.log( "Unable to query. Error: " + "\n" + JSON.stringify(err, undefined, 2));
+				} else {
+					usersList = data;
+					data.Items.forEach(function(user) {
+						console.log(JSON.stringify(user));
+					});
+				
+				}
+			});
+		}
+	</script>
 
 </body>
 </html> 
