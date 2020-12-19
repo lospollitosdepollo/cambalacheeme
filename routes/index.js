@@ -28,6 +28,10 @@ router.get('/peticionTrueque', function(req, res, next) {
   res.sendFile(path.join(__dirname+'/peticionTrueque.html'));
 })
 
+router.get('/landing', function(req, res, next) {
+  res.sendFile(path.join(__dirname+'/landing.html'));
+})
+
 module.exports = router;
 
 //   res.sendFile(path.join(__dirname+'/index.html'));
