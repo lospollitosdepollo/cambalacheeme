@@ -11408,9 +11408,34 @@
 
 
 	<script>
-	
-	document.getElementById("p_Usuario").innerHTML = "raren";
-	document.getElementById("p_Nombre").innerHTML = "Ariana";
+
+		document.getElementById("p_Usuario").innerHTML = "raren";
+		document.getElementById("p_Nombre").innerHTML = "Ariana";
+
+		AWS.config.region = 'us-east-2'; // Región
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+			IdentityPoolId: 'us-east-2:7b407fd7-19f2-48ee-b302-38bbbbde19fe',
+			RoleArn: "arn:aws:iam::374632472070:role/Cognito_ProyectoComponentesUnauth_Role"
+		});
+		var dynamodb = new AWS.DynamoDB();
+		var docClient = new AWS.DynamoDB.DocumentClient();
+
+		function getAllProductos() {
+			const params = {
+				TableName: "Productos"
+			};
+
+			dynamoDB.scan(params, function (err, data) {
+				if (err) {
+					console.error("Unable to find movies", err);
+				} else {
+					console.log(`Found ${data.Count} productos`);
+					console.log(data.Items);
+				}
+			});
+		}
+
+		getAllProductos();
 
 	</script>
 
