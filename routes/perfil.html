@@ -17,7 +17,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
     
     <!-- Theme CSS -->  
-    <link id="theme-style" rel="stylesheet" href="css/theme-1.css">
+	<link id="theme-style" rel="stylesheet" href="css/theme-1.css">
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head> 
 
@@ -79,7 +81,7 @@
 				
 				<div class="my-2 my-md-3">
 					<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Contacto</a>
-					<a class="btn btn-secondary-secondary" href="https://themes.3rdwavemedia.com/" target="_blank">Cerrar Sesión</a>
+					<a class="btn btn-secondary-secondary" onClick="cerrarSesion()" href="https://themes.3rdwavemedia.com/" target="_blank">Cerrar Sesión</a>
 
 				</div>
 			</div>
@@ -112,9 +114,9 @@
 					    <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="img/pizzamordida.jpg" alt="image">
 					    <div class="media-body">
 						    <h3 class="title mb-1"><a href="blog-post.html">Una Pizza a Medio Comer</a></h3>
-						    <div class="meta mb-1"><span class="date">Publicado hace 2 días</span><span class="time">Precio: 2.000</span><span class="comment"><a href="#">Estado: Ligeramente Usado</a></span></div>
+						    <!-- <div class="meta mb-1"><span class="date">Publicado hace 2 días</span><span class="time">Precio: 2.000</span><span class="comment"><a href="#">Estado: Ligeramente Usado</a></span></div> -->
 						    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-						    <a class="more-link" href="blog-post.html">Read more &rarr;</a>
+						    <button class="more-link" onclick="solicitar(2)"> SOLICITAR TRUEQUE</button>
 					    </div><!--//media-body-->
 				    </div><!--//media-->
 			    </div><!--//item-->
@@ -123,9 +125,9 @@
 					    <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="img/piano.jpg" alt="image">
 					    <div class="media-body">
 						    <h3 class="title mb-1"><a href="blog-post.html">Piano</a></h3>
-						    <div class="meta mb-1"><span class="date">Publicado hace 8 días</span><span class="time">Precio: 120.000</span><span class="comment"><a href="#">Estado: Ligeramente Usado</a></span></div>
+						    <!-- <div class="meta mb-1"><span class="date">Publicado hace 8 días</span><span class="time">Precio: 120.000</span><span class="comment"><a href="#">Estado: Ligeramente Usado</a></span></div> -->
 						    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-						    <a class="more-link" href="blog-post.html">Read more &rarr;</a>
+							<button class="more-link" onclick="solicitar(2)" > SOLICITAR TRUEQUE</button>
 					    </div><!--//media-body-->
 				    </div><!--//media-->
 			    </div><!--//item-->
@@ -135,9 +137,9 @@
 					    <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="img/calculadora.jpg" alt="image">
 					    <div class="media-body">
 						    <h3 class="title mb-1"><a href="blog-post.html">Calculadora vuelta loca.</a></h3>
-						    <div class="meta mb-1"><span class="date">Publicado hace 12 días</span><span class="time">Precio: 11.000</span><span class="comment"><a href="#">Estado: Nuevo</a></span></div>
+						    <!-- <div class="meta mb-1"><span class="date">Publicado hace 12 días</span><span class="time">Precio: 11.000</span><span class="comment"><a href="#">Estado: Nuevo</a></span></div> -->
 						    <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-						    <a class="more-link" href="blog-post.html">Read more &rarr;</a>
+						    <button class="more-link" onclick="solicitar(452)" > SOLICITAR TRUEQUE</button>
 					    </div><!--//media-body-->
 				    </div><!--//media-->
 
@@ -174,7 +176,7 @@
 	 <script>
 	  
 
-	  var usuario =  sessionStorage.getItem("usuarioActivo").getElementById("user");
+	  var usuario =  sessionStorage.getItem("usuarioActivo");
 	  
 	  listarUsuarios();
 
@@ -217,6 +219,24 @@
 				}
 			});
 		}
+
+		function cerrarSesion(){
+			sessionStorage.removeItem("usuarioActivo");
+			window.location.href = '/';
+
+		}
+
+
+		function solicitar(idProducto){
+			swal({ 
+                         title: 'Trueque Solicitado',
+                         type: 'warning'
+            });
+
+		}
+
+
+		
 	</script>
 
 </body>
