@@ -58,7 +58,7 @@
 
 			<div id="navigation" class="collapse navbar-collapse flex-column" >
 				<div class="profile-section pt-3 pt-lg-0">
-				    <img class="profile-image mb-3 rounded-circle mx-auto" src="img/barter.png" alt="image" >			
+				    <img class="profile-image mb-3 rounded-circle mx-auto" src="https://drive.google.com/uc?id=1Cx50cjy9S18LCh0sN-69NzYtlO2ves3i" alt="image" >			
 					
 					<!--//Aca van los datos del perfil-->
 
@@ -95,16 +95,15 @@
 			    <div class="intro">Esto es todo lo que este usuario tiene en su inventario acutalmente</div>
 			    <form class="signup-form form-inline justify-content-center pt-3">
                     <div class="form-group">
-                        <label class="sr-only" for="semail">Your email</label>
-                        <input type="email" id="semail" name="semail1" class="form-control mr-md-1 semail" placeholder="Producto">
+
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <div class="my-2 my-md-3">
+						<a class="btn btn-primary" href="/formProducto" target="_blank">Registrar Producto</a>
+					</div>
                 </form>
             </div><!--//container-->
 			
-			<div class="my-2 my-md-3">
-				<a class="btn btn-primary" href="/formProducto" target="_blank">Registrar Producto</a>
-			</div>
+			
 
 	    </section>
 	    <section class="blog-list px-3 py-5 p-md-5">
@@ -190,14 +189,6 @@
 		var usersList = [];
 
 
-        function infoUsuario (usuario) {   
-             
-            for (let i = 0; i < usersList.Items.length; i++) {
-              if ( usuario == usersList.Items[i].usuario)
-              id = i;
-            }
-            return id;
-        }
 
 
 		
@@ -238,6 +229,7 @@
 
 		
 	</script>
+<script  src="routes\perfil.js"></script>
 
 </body>
 </html> 
