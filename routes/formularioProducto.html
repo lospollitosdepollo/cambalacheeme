@@ -766,14 +766,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Main JS-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.js"
-        type="text/javascript"></script>
-    <script src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
-
     <script>
       //Servicio Imagen
 $(function() {
@@ -844,7 +836,7 @@ let direccionexacta = document.getElementById('txt_direccion_exacta');
 // Funcion para crear Productos
 
 function createItem() {
-    let error = validar();
+    let error = false;
     
     if(error == false) {
         var params = {
@@ -894,87 +886,7 @@ let getRandomInt = () => {
 }
 var idProducto = getRandomInt();
 
-// Función para validar que los campos no estén vacíos
-let validar = () => {
 
-    let error = false;
-
-    if (img_uploader.src == 'http://localhost:3000/public/imgs/item-placeholder.png') {
-        error = true;
-        img_uploader.classList.add('input_error');
-
-    } else {
-      img_uploader.classList.remove('input_error');
-    }
-
-    if (nombre == '') {
-        error = true;
-        nombre.classList.add('input_error');
-    } else {
-        nombre.classList.remove('input_error');
-    }
-
-    if (descripcion == '') {
-        error = true;
-        descripcion.classList.add('input_error');
-    } else {
-        descripcion.classList.remove('input_error');
-    }
-
-    if (condicion == '') {
-        error = true;
-        condicion.classList.add('input_error');
-    }  else {
-        condicion.classList.remove('input_error');
-    }
-
-    if (precio == '') {
-        error = true;
-        precio.classList.add('input_error');
-    }  else {
-        precio.classList.remove('input_error');
-    }
-
-    if (categoria == '') {
-        error = true;
-        categoria.classList.add('input_error');
-    }  else {
-        categoria.classList.remove('input_error');
-    }
-
-    if (provincia == '') {
-        error = true;
-        provincia.classList.add('input_error');
-    } else {
-        provincia.classList.remove('input_error');
-    }
-
-    if (canton == '') {
-        error = true;
-        canton.classList.add('input_error');
-    } else {
-        canton.classList.remove('input_error');
-    }
-
-    if (distrito == '') {
-        error = true;
-        distrito.classList.add('input_error');
-    } else {
-        distrito.classList.remove('input_error');
-    }
-
-    if (direccionexacta == '') {
-        error = true;
-        direccionexacta.classList.add('input_error');
-    } else {
-        direccionexacta.classList.remove('input_error');
-    }
-
-    return error;
-};
-
-
-//Función para limpiar el formulario
 const limpiarFormulario = () => {
 
     nombre = '';
@@ -992,6 +904,6 @@ const limpiarFormulario = () => {
 let btnRegistrarProducto = document.getElementById('btnRegistrarProducto');
 btnRegistrarProducto.addEventListener('click', createItem);
     </script>
-    
+     <script src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 </body>
 </html>
