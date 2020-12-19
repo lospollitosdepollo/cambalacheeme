@@ -22,6 +22,8 @@
 	<!-- Theme CSS -->
 	<link id="theme-style" rel="stylesheet" href="css/theme-1.css">
 
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <style>
@@ -11293,8 +11295,8 @@
 
 				<div class="my-2 my-md-3">
 					<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Contacto</a>
-					<a class="btn btn-secondary-secondary" href="https://themes.3rdwavemedia.com/"
-						target="_blank">Cerrar Sesión</a>
+					<a class="btn btn-secondary-secondary" onClick="cerrarSesion()"
+						href="https://themes.3rdwavemedia.com/" target="_blank">Cerrar Sesión</a>
 
 				</div>
 			</div>
@@ -11321,76 +11323,9 @@
 
 		</section>
 		<section class="blog-list px-3 py-5 p-md-5">
-			<div class="container">
-				<div class="item mb-5">
-					<div class="media">
-						<img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-							src="https://drive.google.com/uc?id=1Pw-RfAVLgla-nAGcBHLF_5la0LD5-EZS" alt="image">
-						<div class="media-body">
-							<h3 class="title mb-1"><a href="blog-post.html">Una Pizza a Medio Comer</a></h3>
-							<div class="meta mb-1"><span class="date">Publicado hace 2 días</span><span
-									class="time">Precio: 2.000</span><span class="comment"><a href="#">Estado:
-										Ligeramente Usado</a></span></div>
-							<div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-								ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-								montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-							<a class="more-link" href="blog-post.html">Read more &rarr;</a>
-						</div>
-						<!--//media-body-->
-					</div>
-					<!--//media-->
-				</div>
-				<!--//item-->
-				<div class="item mb-5">
-					<div class="media">
-						<img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-							src="https://drive.google.com/uc?id=17QoIiVtOBswSUyAen8ijQfY2uRmPfmxS" alt="image">
-						<div class="media-body">
-							<h3 class="title mb-1"><a href="blog-post.html">Piano</a></h3>
-							<div class="meta mb-1"><span class="date">Publicado hace 8 días</span><span
-									class="time">Precio: 120.000</span><span class="comment"><a href="#">Estado:
-										Ligeramente Usado</a></span></div>
-							<div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-								ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-								montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-							<a class="more-link" href="blog-post.html">Read more &rarr;</a>
-						</div>
-						<!--//media-body-->
-					</div>
-					<!--//media-->
-				</div>
-				<!--//item-->
+			<div id="mostrar">
 
-				<div class="item mb-5">
-					<div class="media">
-						<img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-							src="https://drive.google.com/uc?id=1_o2arOY2ezya4sSfZxViFy98YkhLWx6W" alt="image">
-						<div class="media-body">
-							<h3 class="title mb-1"><a href="blog-post.html">Calculadora vuelta loca.</a></h3>
-							<div class="meta mb-1"><span class="date">Publicado hace 12 días</span><span
-									class="time">Precio: 11.000</span><span class="comment"><a href="#">Estado:
-										Nuevo</a></span></div>
-							<div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-								ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-								montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
-							<a class="more-link" href="blog-post.html">Read more &rarr;</a>
-						</div>
-						<!--//media-body-->
-					</div>
-					<!--//media-->
-
-
-
-
-
-					<nav class="blog-nav nav nav-justified my-5">
-						<a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Anterior<i
-								class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-						<a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Siguiente<i
-								class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-					</nav>
-
-				</div>
+			</div>
 		</section>
 
 		<footer class="footer text-center py-2 theme-bg-dark">
@@ -11404,42 +11339,251 @@
 
 	</div>
 	<!--//main-wrapper-->
+
+
+
+
+
+
+
 	<!-- Javascript -->
 
-
 	<script>
-
 		document.getElementById("p_Usuario").innerHTML = "raren";
 		document.getElementById("p_Nombre").innerHTML = "Ariana";
-
 		AWS.config.region = 'us-east-2'; // Región
 		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 			IdentityPoolId: 'us-east-2:7b407fd7-19f2-48ee-b302-38bbbbde19fe',
 			RoleArn: "arn:aws:iam::374632472070:role/Cognito_ProyectoComponentesUnauth_Role"
 		});
+
+		var usersList = [];
 		var dynamodb = new AWS.DynamoDB();
 		var docClient = new AWS.DynamoDB.DocumentClient();
 
-		function getAllProductos() {
-			const params = {
-				TableName: "Productos"
+		var table = { TableName: "Usuarios" }
+		var table = { TableName: "Productos" }
+
+
+
+
+		function sesionActual() {
+
+			var usuario = sessionStorage.getItem("usuarioActivo");
+
+			listarUsuarios();
+
+
+			var idUsuario = infoUsuario(usuario);
+
+
+		//	var nombre = usersList.Items[idUsuario].getElementById("primernombre"); 
+		//	var nombre = "Quesito";
+
+		let p_usuario = document.getElementById("p_Usuario");
+		let nombre = document.getElementById("p_Nombre");
+
+		}
+
+
+		function infoUsuario(usuario) {
+
+			for (let i = 0; i < usersList.Items[i].length; i++) {
+				if (usuario == usersList.Items[i].usuario)
+					id = i;
+				console.log(usersList[i].nombre);
+			}
+			return id;
+		}
+
+
+		function listarUsuarios() {
+
+			var params = {
+				TableName: "Usuarios",
 			};
 
-			dynamoDB.scan(params, function (err, data) {
+			docClient.scan(params, function (err, data) {
 				if (err) {
-					console.error("Unable to find movies", err);
+					console.log("Unable to query. Error: " + "\n" + JSON.stringify(err, undefined, 2));
 				} else {
-					console.log(`Found ${data.Count} productos`);
-					console.log(data.Items);
+					usersList = data;
+					data.Items.forEach(function (user) {
+						console.log(JSON.stringify(user));
+					});
+
 				}
 			});
 		}
 
-		getAllProductos();
+
+		function listarProductos() {
+
+			var params = {
+				TableName: "Productos",
+			};
+
+			docClient.scan(params, function (err, data) {
+				if (err) {
+					console.log("Unable to query. Error: " + "\n" + JSON.stringify(err, undefined, 2));
+				} else {
+					usersList = data;
+					data.Items.forEach(function (user) {
+						console.log(JSON.stringify(user));
+					});
+
+				}
+			});
+		}
+
+		function cerrarSesion() {
+			sessionStorage.removeItem("usuarioActivo");
+			window.location.href = '/';
+
+		}
+
+		listarProductos();
+
+		function listarProductos() {
+
+			var params = {
+			TableName : "Productos",
+			};
+
+			docClient.scan(params, function(err, data) {
+				if (err) {
+					console.log( "Unable to query. Error: " + "\n" + JSON.stringify(err, undefined, 2));
+				} else {
+					data.Items.forEach(function(product) {
+						console.log(JSON.stringify(product));
+						
+					});
+					genera_tabla(data.Items);
+				
+				}
+			});
+		}
+
+
+		function genera_tabla(data) {
+				// Obtener la referencia del elemento body
+				var body = document.getElementById("mostrar");
+
+				// Crea un elemento <table> y un elemento <tbody>
+				var tabla   = document.createElement("table");
+				var tblBody = document.createElement("tbody");
+
+				// Crea las celdas
+				for (var i = 0; i < data.length; i++) {
+					// Crea las hileras de la tabla
+					var hilera = document.createElement("tr");
+
+
+
+					// direccionexacta: "por ahi"
+
+						var celda = document.createElement("td");
+						var textoCelda = document.createTextNode(data[i].nombre);
+						celda.appendChild(textoCelda);
+						var celda2 = document.createElement("td");
+						var textoCelda2 = document.createTextNode(data[i].descripcion);
+						celda2.appendChild(textoCelda2);
+						var celda3 = document.createElement("td");
+						var textoCelda3 = document.createTextNode(data[i].precio);
+						celda3.appendChild(textoCelda3);
+						var celda4 = document.createElement("td");
+						var textoCelda4 = document.createTextNode(data[i].estado);
+						celda4.appendChild(textoCelda4);
+						var celda5 = document.createElement("td");
+						var textoCelda5 = document.createTextNode(data[i].condicion);
+						celda5.appendChild(textoCelda5);
+						var celda6 = document.createElement("td");
+						var textoCelda6 = document.createTextNode(data[i].categoria);
+						celda6.appendChild(textoCelda6);
+						var celda7 = document.createElement("td");
+						var textoCelda7 = document.createTextNode(data[i].pais);
+						celda7.appendChild(textoCelda7);
+						var celda8 = document.createElement("td");
+						var textoCelda8 = document.createTextNode(data[i].provincia);
+						celda8.appendChild(textoCelda8);
+						var celda9 = document.createElement("td");
+						var textoCelda9 = document.createTextNode(data[i].canton);
+						celda9.appendChild(textoCelda9);
+						var celdadiez = document.createElement("td");
+						var textoCelda10 = document.createTextNode(data[i].distrito);
+						celdadiez.appendChild(textoCelda10);
+						var celdaonce = document.createElement("td");
+						var textoCelda10 = document.createTextNode(data[i].direccionexacta);
+						celdaonce.appendChild(textoCelda10);
+						
+
+
+						hilera.appendChild(celda);
+						hilera.appendChild(celda2);
+						hilera.appendChild(celda3);
+						hilera.appendChild(celda4);
+						hilera.appendChild(celda5);
+						hilera.appendChild(celda6);
+						hilera.appendChild(celda7);
+						hilera.appendChild(celda8);
+						hilera.appendChild(celda9);
+						hilera.appendChild(celdadiez);
+						hilera.appendChild(celdaonce);
+
+
+						
+
+
+
+
+
+
+
+
+						var celdaBoton = document.createElement("td");
+						var btnTrueque = document.createElement("button");
+						btnTrueque.innerHTML = "Solicitar trueque"
+						let dataToShow = data[i]
+						btnTrueque.addEventListener("click", function () {
+							swal({
+								title: 'Trueque Solicitado',
+								type: 'warning'
+							});
+						});
+						celdaBoton.appendChild(btnTrueque);
+						celda.appendChild(textoCelda);
+						hilera.appendChild(celdaBoton);
+
+
+					// agrega la hilera al final de la tabla (al final del elemento tblbody)
+					tblBody.appendChild(hilera);
+				}
+
+				// posiciona el <tbody> debajo del elemento <table>
+				tabla.appendChild(tblBody);
+				// appends <table> into <body>
+				body.appendChild(tabla);
+				// modifica el atributo "border" de la tabla y lo fija a "2";
+				tabla.setAttribute("border", "2");
+		}
+
+		function hacerTrueque(data) {
+			alert(data);
+		}
+
+
+		function solicitar(idProducto) {
+			swal({
+				title: 'Trueque Solicitado',
+				type: 'warning'
+			});
+
+		}
+		sesionActual();
+
+
 
 	</script>
-
-	<script src="routes\perfil.js"></script>
 
 </body>
 
